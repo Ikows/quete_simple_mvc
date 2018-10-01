@@ -1,0 +1,15 @@
+{
+    "name": "ikows/quete_simple_mvc",
+    "authors": [
+        {
+            "name": "Nicolas Coulaud",
+            "email": "coulauddev@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
+}
