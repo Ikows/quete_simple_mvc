@@ -55,4 +55,22 @@ class ItemController extends AbstractController
         return $this->twig->render('edit.html.twig', ['item' => $item]);
 
     }
+
+    public function delete($id)
+    {
+        $itemManager = new Model\ItemManager($this->pdo);
+        $item = $itemManager->selectOneById($id);
+
+        if (!empty($_POST))
+        {
+            $item->setTitle($_POST['title']);
+            $itemManager->delete($item);
+            header('Location: /');
+            exit();
+        }
+
+        //Affiche le formulaire :
+        return $this->twig->render('delete.html.twig', ['item' => $item]);
+
+    }
 }

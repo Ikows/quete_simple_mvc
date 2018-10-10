@@ -28,5 +28,11 @@ class ItemManager extends AbstractManager
         $statement->bindValue('id', $item->getId(), \PDO::PARAM_INT);
         return $statement->execute();
     }
-}
 
+    public function delete(Item $item)
+    {
+        $statement = $this->pdo->prepare("DELETE FROM ".self::TABLE." WHERE `id` = :id");
+        $statement->bindValue('id', $item->getId(), \PDO::PARAM_INT);
+        return $statement->execute();
+    }
+}
