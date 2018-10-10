@@ -45,8 +45,6 @@ class ItemController extends AbstractController
 
         if (!empty($_POST))
         {
-            $item = new Model\Item();
-            $item->
             $item->setTitle($_POST['title']);
             $itemManager->update($item);
             header('Location: /');
