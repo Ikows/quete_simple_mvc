@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Connection' => $baseDir . '/app/Connection.php',
     'Controller\\CategoryController' => $baseDir . '/src/Controller/CategoryController.php',
     'Controller\\ItemController' => $baseDir . '/src/Controller/ItemController.php',
     'FastRoute\\BadRouteException' => $vendorDir . '/nikic/fast-route/src/BadRouteException.php',

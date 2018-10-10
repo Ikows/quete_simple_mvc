@@ -1,26 +1,32 @@
 <?php
+
 namespace Model;
+use Model\Item;
 
-require __DIR__ . '/../../app/db.php';
-
-class ItemManager
+class ItemManager extends AbstractManager
 {
+    const TABLE = 'item';
 
-    public function selectAllItems()
+    public function __construct($pdo)
     {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM item";
-        $res = $pdo->query($query);
-        return $res->fetchALL();
+        parent::__construct(self::TABLE, $pdo);
     }
 
-    public function selectOneItem(int $id) : array
+    public function insert(Item $item): int
     {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM item WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`title`) VALUES (:title)");
+        $statement->bindValue('title', $item->getTitle(), \PDO::PARAM_STR);
+        if ($statement->execute()) {
+            return $this->pdo->lastInsertId();
+        }
+    }
+
+    public function update(Item $item)
+    {
+        $statement = $this->pdo->prepare("UPDATE item SET title = :title WHERE item.id = :id");
+        $statement->bindValue('title', $item->getTitle(), \PDO::PARAM_STR);
+        $statement->bindValue('id', $item->getId(), \PDO::PARAM_INT);
         $statement->execute();
-        return $statement->fetch();
     }
 }
+

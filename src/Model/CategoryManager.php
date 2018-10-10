@@ -1,26 +1,23 @@
 <?php
+
 namespace Model;
+use Model\Category;
 
-require __DIR__ . '/../../app/db.php';
-
-class CategoryManager
+class CategoryManager extends AbstractManager
 {
+    const TABLE = 'category';
 
-    public function selectAllItems()
+    public function __construct($pdo)
     {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM category";
-        $res = $pdo->query($query);
-        return $res->fetchALL();
+        parent::__construct(self::TABLE, $pdo);
     }
 
-    public function selectOneItem(int $id) : array
+    public function insert(Category $category): int
     {
-        $pdo = new \PDO(DSN, USER, PASS);
-        $query = "SELECT * FROM category WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
-        $statement->execute();
-        return $statement->fetch();
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`name`) VALUES (:name)");
+        $statement->bindValue('name', $category->getName(), \PDO::PARAM_STR);
+        if ($statement->execute()) {
+            return $this->pdo->lastInsertId();
+        }
     }
 }
