@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <p>Modifiez le titre de cette Category</p>
+        <p><input type="text" name="name" value="{{ category.name }}"></p>
+        <p><input type="submit" name="submit" value="Tchéké-boom"></p>
+    </form>
+
+    <a href="/categories">Annuler et revenir aux mushi-bushis</a>
+{% endblock %}

@@ -1,15 +1,15 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}All Categories{% endblock %}
+{% block title %}All categories{% endblock %}
 {% block content %}
     <section>
         <h1>Categories</h1>
         <ul>
             {% for category in categories %}
-                <li>{{ category.name }}</li>
+                <li><a href="/category/{{ category.id }}">{{ category.name }}</a> <a href="/category/edit/{{ category.id }}" style="color: green">Editer </a><a href="/category/delete/{{ category.id }}" style="color: #ff4513"> Supprimer</a></li>
             {% endfor %}
         </ul>
+        <p><a href="/category/add/">Ajouter un mushi-bushi</a></p><br>
+        <p><a href="/">Voir les Items</a></p>
     </section>
 {% endblock %}
-
-
