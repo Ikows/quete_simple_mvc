@@ -20,7 +20,7 @@ abstract class AbstractController
     public function __construct()
     {
         // instanciation de Twig
-        $loader = new Twig_Loader_Filesystem('/home/ikows/quetes/phpMVC/quete_simple_mvc/src/View');
+        $loader = new Twig_Loader_Filesystem(APP_VIEW_PATH);
         $this->twig = new Twig_Environment($loader, [
                 'cache' => !APP_DEV,
                 'debug' => APP_DEV,
